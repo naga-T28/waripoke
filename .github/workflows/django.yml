@@ -15,17 +15,18 @@ jobs:
       - uses: actions/checkout@v3.5.3
 
       # FTP 経由でファイルをサーバへ転送する
-      - name: FTP Deploy
+      - name: SFTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # パスフレーズがある場合は `passphrase: ${{ secrets.SFTP_PASSPHRASE }}`
           server-dir: waripoke.xyz/public_html/
           exclude: |
             **/.**/**
             .editorconfig
             .gitignore
+
 
       # SSH 経由でコマンドを実行する
       - name: SSH Remote Commands
