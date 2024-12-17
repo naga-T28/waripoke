@@ -18,9 +18,9 @@ jobs:
       - name: SFTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # パスフレーズがある場合は `passphrase: ${{ secrets.SFTP_PASSPHRASE }}`
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          private_key: ${{ secrets.SSH_PRIVATE_KEY}}  
           server-dir: waripoke.xyz/public_html/
           exclude: |
             **/.**/**
