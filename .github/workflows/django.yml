@@ -27,9 +27,11 @@ jobs:
             .editorconfig
             .gitignore
       #ここまでは成功
+      
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@master
         with:
+          debug: true
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
