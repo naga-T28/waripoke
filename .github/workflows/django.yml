@@ -16,7 +16,7 @@ jobs:
 
       # SSH 経由でファイルをサーバへ転送する
       - name: SSH Upload Files
-        uses: appleboy/scp-action@v0.1.13
+        uses: appleboy/scp-action@v0.2.0  # 最新バージョンに修正
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
@@ -91,3 +91,4 @@ jobs:
 
             # index.cgi のパーミッションを変更
             chmod 755 index.cgi
+
