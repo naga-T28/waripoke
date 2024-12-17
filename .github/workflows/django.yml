@@ -2,7 +2,6 @@
 name: Production Deploy
 
 on:
-  # mainブランチへプッシュされたら動作
   push:
     branches:
       - main
@@ -26,6 +25,10 @@ jobs:
             **/.**/**
             .editorconfig
             .gitignore
+
+      # .env ディレクトリが存在しない場合に作成
+      - name: Ensure .env Directory Exists
+        run: mkdir -p waripoke.xyz/public_html
 
       # .env を作成
       - name: Create .env file
