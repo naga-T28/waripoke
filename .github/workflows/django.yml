@@ -65,10 +65,10 @@ jobs:
             import dotenv
             import pymysql
 
-            # pipenv のパスを追加
+            # pipenvのパスを追加
             sys.path.insert(0, "$(pipenv --venv)/bin")
 
-            # .env ファイルから環境変数を読み込む
+            # .envファイルから環境変数を読み込む
             dotenv.load_dotenv()
 
             # pymysql で MySQL を使えるようにする
