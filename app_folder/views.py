@@ -313,3 +313,5 @@ class PhotographView(View):
 
 # EditGroupViewをedit_groupとしてエクスポート
 edit_group = EditGroupView.as_view()
+
+#deploytest
