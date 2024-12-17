@@ -44,6 +44,10 @@ jobs:
       - name: Install dependencies
         run: pipenv sync
 
+      # pymysql を手動でインストール
+      - name: Install pymysql
+        run: pipenv run pip install pymysql
+
       # django をインストールする
       - name: Install Django
         run: pipenv run pip install django
@@ -59,6 +63,7 @@ jobs:
       # デプロイ設定のチェック
       - name: Check Deployment
         run: pipenv run python manage.py check --deploy
+
 
 
 
