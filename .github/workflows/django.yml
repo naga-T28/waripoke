@@ -1,4 +1,4 @@
-# 本番環境へデプロイする
+# 本番環境へデプロイ
 name: Production Deploy
 
 on:
