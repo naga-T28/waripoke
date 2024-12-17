@@ -28,15 +28,15 @@ jobs:
             .gitignore
       #ここまでは成功
       
+      # SSH 経由でコマンドを実行する
       - name: SSH Remote Commands
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.10
         with:
-          debug: true
           host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          port: ${{ secrets.SSH_PORT }}
           script: |
             cd waripoke.xyz/public_html/
 
