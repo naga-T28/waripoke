@@ -25,7 +25,7 @@ jobs:
 
             # Gitリポジトリから最新のコードをクローンまたはプルする
             if [ ! -d ".git" ]; then
-              git clone ${{ secrets.REPO_URL }} .
+              git clone .
             else
               git pull
             fi
