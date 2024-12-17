@@ -1,8 +1,6 @@
-# 本番環境へデプロイする
 name: Production Deploy
 
 on:
-  # mainブランチへプッシュされたとき
   push:
     branches:
       - main
@@ -14,19 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
-      # SSH 経由でファイルをサーバへ転送する
-      - name: SSH Upload Files
-        uses: appleboy/scp-action@v0.2.0  # 最新バージョンに修正
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: './'  # Upload entire local directory
-          destination: '~/waripoke.xyz/public_html/'
-
-      # SSH 経由でコマンドを実行する
-      - name: SSH Remote Commands
+      - name: SSH Clone or Pull
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -37,6 +23,13 @@ jobs:
           script: |
             cd waripoke.xyz/public_html/
 
+            # Gitリポジトリから最新のコードをクローンまたはプルする
+            if [ ! -d ".git" ]; then
+              git clone ${{ secrets.REPO_URL }} .
+            else
+              git pull
+            fi
+
             # .env を作成
             cat << EOF > .env
             DJANGO_SETTINGS_MODULE=config.settings.config_prod
@@ -46,7 +39,7 @@ jobs:
             DATABASE_NAME=${{ secrets.DATABASE_NAME_PROD }}
             DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME_PROD }}
             DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD_PROD }}
-            GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+            GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
             EOF
 
             # 仮想環境を作成
@@ -64,7 +57,7 @@ jobs:
             # デプロイ設定のチェック
             pipenv run python manage.py check --deploy
 
-            # index.cgi を作成
+            # index.cgi の作成とパーミッション変更
             cat << EOF > index.cgi
             #!$(pipenv --venv)/bin/python
             import sys
@@ -89,6 +82,4 @@ jobs:
             CGIHandler().run(application)
             EOF
 
-            # index.cgi のパーミッションを変更
             chmod 755 index.cgi
-
