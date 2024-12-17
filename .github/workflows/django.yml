@@ -14,18 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
-      # FTP 経由でファイルをサーバへ転送する
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      # SSH 経由でファイルをサーバへ転送する
+      - name: SSH Upload Files
+        uses: appleboy/scp-action@v0.1.13
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /home/xs910683/waripoke.xyz/public_html/
-          exclude: |
-            **/.**/**
-            .editorconfig
-            .gitignore
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: './'  # Upload entire local directory
+          destination: '~/waripoke.xyz/public_html/'
 
       # SSH 経由でコマンドを実行する
       - name: SSH Remote Commands
