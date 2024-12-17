@@ -27,17 +27,14 @@ jobs:
             .editorconfig
             .gitignore
       #ここまでは成功
-
-      # SSH経由でコマンドを実行する
       - name: SSH Remote Commands
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@main
         with:
           host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          debug: true
+          port: ${{ secrets.SSH_PORT }}
           script: |
             cd waripoke.xyz/public_html/
 
