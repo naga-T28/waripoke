@@ -27,7 +27,7 @@ jobs:
             .editorconfig
             .gitignore
 
-      # SSH 経由でコマンドを実行する
+      # SSH経由でコマンドを実行する
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.10
         with:
