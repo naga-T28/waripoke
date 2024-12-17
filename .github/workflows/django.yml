@@ -21,7 +21,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: waripoke.xyz/public_html/
+          server-dir: /home/xs910683/waripoke.xyz/public_html/
           exclude: |
             **/.**/**
             .editorconfig
