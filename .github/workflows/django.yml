@@ -5,7 +5,7 @@ on:
   # master ブランチへプッシュされたとき
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
