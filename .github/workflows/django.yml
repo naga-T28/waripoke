@@ -28,7 +28,7 @@ jobs:
             .gitignore
       #ここまでは成功
       - name: SSH Remote Commands
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
