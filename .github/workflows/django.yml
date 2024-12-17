@@ -29,11 +29,6 @@ jobs:
       #ここまでは成功
       
       # SSH 経由でコマンドを実行する
-      - name: Set up SSH keys
-        uses: webfactory/ssh-agent@v0.4.2
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.10
         with:
