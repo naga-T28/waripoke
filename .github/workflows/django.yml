@@ -36,6 +36,10 @@ jobs:
         run: |
           pipenv --python 3
 
+      # Pipfile.lock を生成する
+      - name: Lock Pipfile
+        run: pipenv lock
+
       # Pipfile.lock からパッケージをインストール
       - name: Install dependencies
         run: pipenv sync
@@ -51,6 +55,7 @@ jobs:
       # デプロイ設定のチェック
       - name: Check Deployment
         run: pipenv run python manage.py check --deploy
+
 
 
 
