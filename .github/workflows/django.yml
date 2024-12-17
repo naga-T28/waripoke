@@ -26,20 +26,10 @@ jobs:
             .editorconfig
             .gitignore
 
-      # .env ディレクトリが存在しない場合に作成
-      - name: Ensure .env Directory Exists
-        run: mkdir -p waripoke.xyz/public_html
-
-      # .env を作成
-      - name: Create .env file
+      # pipenv をインストールする
+      - name: Install pipenv
         run: |
-          echo "DJANGO_SETTINGS_MODULE=config.settings.config_prod" > waripoke.xyz/public_html/.env
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> waripoke.xyz/public_html/.env
-          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> waripoke.xyz/public_html/.env
-          echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> waripoke.xyz/public_html/.env
-          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME_PROD }}" >> waripoke.xyz/public_html/.env
-          echo "DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME_PROD }}" >> waripoke.xyz/public_html/.env
-          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD_PROD }}" >> waripoke.xyz/public_html/.env
+          python3 -m pip install pipenv
 
       # 仮想環境を作成
       - name: Create Python Virtual Environment
@@ -61,5 +51,6 @@ jobs:
       # デプロイ設定のチェック
       - name: Check Deployment
         run: pipenv run python manage.py check --deploy
+
 
 
