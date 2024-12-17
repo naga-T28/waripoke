@@ -42,7 +42,7 @@ jobs:
             GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
             EOF
 
-            # 仮想環境を作成
+            #仮想環境を作成
             pipenv --python 3
 
             # Pipfile.lock からパッケージをインストール
