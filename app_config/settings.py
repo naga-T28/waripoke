@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7+_vo%2fis!0r!%91lgll+a)hengbi6*lg0v-(-fa1l8fd+jq5'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["waripoke.xyz"]
 
 
 # Application definition
@@ -80,7 +80,11 @@ WSGI_APPLICATION = 'app_config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.environ["DATABASE_NAME"],
+        'USER': os.environ["DATABASE_USERNAME"],
+        'PASSWORD': os.environ["DATABASE_PASSWORD"],
+        'HOST': os.environ["DATABASE_HOST"],
+        'PORT': os.environ["DATABASE_PORT"],
     }
 }
 
@@ -133,5 +137,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = "app_folder:login"      ### 追加
 LOGIN_REDIRECT_URL = "app_folder:home"      ### 追加
 LOGOUT_REDIRECT_URL = "app_folder:top"      ### 追加
+
+# セキュリティ設定
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_PRELOAD = True
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/Users/ooishikonryouma/Downloads/key.json" ##＃追加
