@@ -287,7 +287,7 @@ class PhotographView(View):
             total_amount = self.extract_total_amount(extracted_text)
             
             if total_amount is not None:
-            # 合計金額をセッションに保存
+            # 合計金額を保存
                 request.session['total_amount'] = total_amount
 
             # レスポンスデータの作成
