@@ -28,17 +28,6 @@ jobs:
             .gitignore
 
       # SSH経由でコマンドを実行する
-      - name: Deploy with SSH (Debug)
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: "example.com"
-          username: "your_username"
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          debug: true
-          script: |
-            echo "SSH connection successful"
-
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -47,6 +36,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          debug: true
           script: |
             cd waripoke.xyz/public_html/
 
