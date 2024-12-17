@@ -44,6 +44,10 @@ jobs:
       - name: Install dependencies
         run: pipenv sync
 
+      # pymysql をインストールする
+      - name: Install pymysql
+        run: pipenv run pip install pymysql
+
       # DB マイグレーション
       - name: Database Migrate
         run: pipenv run python manage.py migrate
@@ -55,6 +59,7 @@ jobs:
       # デプロイ設定のチェック
       - name: Check Deployment
         run: pipenv run python manage.py check --deploy
+
 
 
 
