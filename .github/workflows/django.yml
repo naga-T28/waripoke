@@ -26,7 +26,7 @@ jobs:
             **/.**/**
             .editorconfig
             .gitignore
-      #ここまでは成功ssh変更してみた
+      #ここまでは成功ssh変更してみたtest
 
       # SSH経由でコマンドを実行する
       - name: SSH Remote Commands
