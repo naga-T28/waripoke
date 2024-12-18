@@ -69,29 +69,32 @@ jobs:
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #!/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS
+            #!/usr/bin/env python3
+            import os
             import sys
-
             import dotenv
             import pymysql
 
-            # pipenv のパスを追加
-            sys.path.insert(0, "$(pipenv --venv)/bin")
+            # 仮想環境のパスを設定
+            sys.path.insert(0, "/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS/lib/python3.9/site-packages")
 
             # .env ファイルから環境変数を読み込む
             dotenv.load_dotenv()
 
-            # pymysql で MySQL を使えるようにする
+            # pymysqlをMySQLdbとして使用
             pymysql.install_as_MySQLdb()
 
-            from wsgiref.handlers import CGIHandler
+            # Djangoアプリケーションの設定モジュールを指定
+            os.environ['DJANGO_SETTINGS_MODULE'] = 'app_config.settings'
+
+            # WSGIアプリケーションを読み込み
             from django.core.wsgi import get_wsgi_application
-
-            os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
-
-            # アプリケーションを起動
             application = get_wsgi_application()
+
+            # CGIとして実行
+            from wsgiref.handlers import CGIHandler
             CGIHandler().run(application)
+
             EOF
 
             # index.cgi のパーミッションを変更
