@@ -69,7 +69,7 @@ jobs:
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #!$(pipenv --venv)/bin/python
+            #!$/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS
             import sys
 
             import dotenv
