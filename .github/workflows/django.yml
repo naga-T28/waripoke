@@ -93,7 +93,9 @@ jobs:
 
             # CGIとして実行
             from wsgiref.handlers import CGIHandler
-            CGIHandler().run(application)
+            from my_project.wsgi import application
+            if __name__ == "__main__":
+              CGIHandler().run(application)
 
             EOF
 
