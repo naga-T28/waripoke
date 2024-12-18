@@ -24,11 +24,12 @@ print("FILE_PATH: ", os.path.dirname(__file__))
 print("PROJECT_NAME: ", os.path.basename(os.path.dirname(__file__)))
 
 FILE_PATH = os.path.dirname(__file__)
-PROJECT_NAME = os.path.basename("~/waripoke.xyz/public_html/waripoke/app_config")
+PROJECT_NAME = os.path.basename("~/waripoke.xyz/public_html/app_config")
 
-sys.path.append(os.path.dirname("~/waripoke.xyz/public_html/waripoke/app_config"))
-sys.path.append("~/waripoke.xyz/public_html/waripoke/app_config")
+sys.path.append(os.path.dirname("~/waripoke.xyz/public_html/app_config"))
+sys.path.append("~/waripoke.xyz/public_html/app_config")
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app_config" + ".settings")
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app_config.settings')
 
 application = get_wsgi_application()

@@ -20,6 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # .envファイルを読み込む
 load_dotenv()
 
+CSRF_TRUSTED_ORIGINS = ["https://waripoke.xyz"]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
