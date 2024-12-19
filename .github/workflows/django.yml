@@ -75,7 +75,7 @@ jobs:
             import dotenv
             import pymysql
 
-            # 仮想環境のパスを設定
+            #仮想環境のパスを設定
             sys.path.insert(0, "/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS/lib/python3.9/site-packages")
 
             # .env ファイルから環境変数を読み込む
