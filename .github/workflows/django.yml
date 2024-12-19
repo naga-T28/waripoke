@@ -1,8 +1,8 @@
-#本番環境へデプロイ
+# 本番環境へデプロイ
 name: Production Deploy
 
 on:
-  #mainブランチへプッシュされたら動作
+  # mainブランチへプッシュされたら動作
   push:
     branches:
       - main
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.5.3
 
-      #FTP経由でファイルをサーバへ転送する
+      # FTP経由でファイルをサーバへ転送する
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -26,9 +26,8 @@ jobs:
             **/.**/**
             .editorconfig
             .gitignore
-      #ここまでは成功
-      
-      # SSH 経由でコマンドを実行する
+
+      # SSH経由でコマンドを実行する
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -36,7 +35,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          #passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd waripoke.xyz/public_html/
 
@@ -53,28 +51,30 @@ jobs:
             EOF
 
             # 仮想環境を作成
-            pipenv --python 3
+            python3 -m venv venv
 
-            # Pipfile.lock からパッケージをインストール
-            pipenv sync
+            # 仮想環境を有効化
+            source venv/bin/activate
 
-            # DB マイグレーション
-            pipenv run python manage.py migrate
+            # 必要なパッケージをインストール
+            pip install -r requirements.txt
 
-            # static ファイルの収集
-            pipenv run python manage.py collectstatic --noinput
+            # DBマイグレーション
+            python manage.py migrate
+
+            # staticファイルの収集
+            python manage.py collectstatic --noinput
 
             # デプロイ設定のチェック
-            pipenv run python manage.py check --deploy
+            python manage.py check --deploy
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #!$(pipenv --venv)/bin/python
+            #!$(pwd)/venv/bin/python
             import sys, os
 
-            sys.path.insert(0, "$(pipenv --venv)/bin")
+            sys.path.insert(0, "$(pwd)")
 
-          
             os.environ['DJANGO_SETTINGS_MODULE'] = 'app_config.settings'
 
             from wsgiref.handlers import CGIHandler
@@ -82,12 +82,9 @@ jobs:
 
             application = get_wsgi_application()
             CGIHandler().run(application)
-
-
             EOF
 
             # index.cgi のパーミッションを変更
-            
             chmod 755 index.cgi
 
 
