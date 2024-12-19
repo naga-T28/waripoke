@@ -72,6 +72,8 @@ jobs:
             #!$(pwd)/venv/bin/python
             import sys, os
 
+            !source venv/bin/activate
+
             sys.path.insert(0, "$(pwd)")
 
             os.environ['DJANGO_SETTINGS_MODULE'] = 'app_config.settings'
