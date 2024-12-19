@@ -85,6 +85,7 @@ jobs:
             EOF
 
             # index.cgi のパーミッションを変更
+            chmod -R 755 /home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS
             chmod 755 index.cgi
 
 
