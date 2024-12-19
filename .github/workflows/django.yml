@@ -72,7 +72,9 @@ jobs:
             #!$(pipenv --venv)/bin/python
             import sys, os
 
-            sys.path.insert(0, "/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS")
+            sys.path.insert(0, "$(pipenv --venv)/bin")
+
+          
             os.environ['DJANGO_SETTINGS_MODULE'] = 'app_config.settings'
 
             from wsgiref.handlers import CGIHandler
