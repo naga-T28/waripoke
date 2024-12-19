@@ -59,17 +59,17 @@ jobs:
 
 
             # DBマイグレーション
-            python manage.py migrate
+            python3 manage.py migrate
 
             # staticファイルの収集
-            python manage.py collectstatic --noinput
+            python3 manage.py collectstatic --noinput
 
             # デプロイ設定のチェック
-            python manage.py check --deploy
+            python3 manage.py check --deploy
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #!$(pwd)/venv/bin/python
+            #!$(pwd)/venv/bin/python3
             import sys, os
 
             sys.path.insert(0, "$(pwd)")
