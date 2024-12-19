@@ -69,7 +69,7 @@ jobs:
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #!$(pwd)/venv/bin/python3
+            #!$(pwd)/venv/bin/python
             import sys, os
 
             sys.path.insert(0, "$(pwd)")
