@@ -69,7 +69,7 @@ jobs:
 
             # index.cgi を作成
             cat << EOF > index.cgi
-            #! #!/usr/bin/env python3
+            #!$(pipenv --venv)/bin/python
             import sys, os
 
             sys.path.insert(0, "/home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS")
@@ -85,7 +85,7 @@ jobs:
             EOF
 
             # index.cgi のパーミッションを変更
-            chmod -R 755 /home/xs910683/.local/share/virtualenvs/xs910683-p6CVCTmS
+            
             chmod 755 index.cgi
 
 
