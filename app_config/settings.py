@@ -21,7 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # .envファイルを読み込む
 
 
-CSRF_TRUSTED_ORIGINS = ["waripoke.xyz"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://waripoke.xyz",
+    "https://www.waripoke.xyz",  # 必要に応じてサブドメインも追加
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
