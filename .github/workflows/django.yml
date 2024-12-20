@@ -56,7 +56,9 @@ jobs:
             # 仮想環境を有効化
             source venv/bin/activate
 
-
+            # 必要なパッケージをインストール
+            pip install --upgrade pip
+            pip install django gunicorn psycopg2-binary
 
             # DBマイグレーション
             python3 manage.py migrate
@@ -67,26 +69,22 @@ jobs:
             # デプロイ設定のチェック
             python3 manage.py check --deploy
 
-            # index.cgi を作成
-            cat << EOF > index.cgi
-            #!$(pwd)/venv/bin/python3.9
-            import sys, os
-
-
-            sys.path.insert(0, "$(pwd)")
-
-            os.environ['DJANGO_SETTINGS_MODULE'] = 'app_config.settings'
-
-            from wsgiref.handlers import CGIHandler
-            from django.core.wsgi import get_wsgi_application
-
-            application = get_wsgi_application()
-            CGIHandler().run(application)
+            # Gunicornを起動するシェルスクリプトを作成
+            cat << EOF > start_gunicorn.sh
+            #!/bin/bash
+            source venv/bin/activate
+            exec gunicorn config.wsgi:application \
+              --bind 0.0.0.0:8000 \
+              --workers 3 \
+              --threads 2 \
+              --daemon
             EOF
 
-            # index.cgi のパーミッションを変更
-            chmod 755 index.cgi
+            # スクリプトのパーミッションを変更
+            chmod +x start_gunicorn.sh
 
+            # Gunicornを起動
+            ./start_gunicorn.sh
 
 
 
