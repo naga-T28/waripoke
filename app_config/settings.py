@@ -24,7 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CSRF_TRUSTED_ORIGINS = [
     "https://waripoke.xyz",
-    "https://www.waripoke.xyz",  # 必要に応じてサブドメインも追加
+    "https://www.waripoke.xyz",
+      "http://waripoke.xyz",
+    "http://www.waripoke.xyz",   # 必要に応じてサブドメインも追加
 ]
 
 # Quick-start development settings - unsuitable for production
